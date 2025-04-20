@@ -28,6 +28,40 @@ class TodoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final todo = Provider.of<Todo>(context);
     TextEditingController todoController = TextEditingController();
+
+    void showEditDialog(int index) {
+      todoController.text = todo.todos[index]; // Pre-fill with current todo
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Edit Todo'),
+            content: TextField(
+              controller: todoController,
+              decoration: const InputDecoration(
+                labelText: 'Edit todo',
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context), // Cancel
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (todoController.text.isNotEmpty) {
+                    todo.edit(index, todoController.text);
+                  }
+                  Navigator.pop(context);
+                },
+                child: const Text('Save'),
+              ),
+            ],
+          );
+        },
+      ).then((_) => todoController.clear()); // Clear controller after dialog
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -55,6 +89,7 @@ class TodoPage extends StatelessWidget {
                   title: Text(
                     todo.todos[index],
                   ),
+                  onTap: () => showEditDialog(index),
                   trailing: IconButton(
                     onPressed: () {
                       todo.remove(

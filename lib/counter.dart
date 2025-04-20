@@ -16,7 +16,10 @@ class Todo extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void edit(String todo){
-  //   _todos.
-  // }
+  void edit(int index, String newTodo) {
+    if (index >= 0 && index < _todos.length) {
+      _todos[index] = newTodo;
+      notifyListeners();
+    }
+  }
 }
