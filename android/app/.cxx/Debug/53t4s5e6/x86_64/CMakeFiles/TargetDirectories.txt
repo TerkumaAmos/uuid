@@ -1,0 +1,2 @@
+/Users/user/Desktop/T.E.C.H_uma/hate/android/app/.cxx/Debug/53t4s5e6/x86_64/CMakeFiles/edit_cache.dir
+/Users/user/Desktop/T.E.C.H_uma/hate/android/app/.cxx/Debug/53t4s5e6/x86_64/CMakeFiles/rebuild_cache.dir
