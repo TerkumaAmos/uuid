@@ -1,16 +1,23 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  runApp(MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
+  runApp(ChangeNotifierProvider(
+    create: (_) => BreadCrumbProvider(),
+    child: MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
+      routes: {
+        '/new': (context) => const Material(),
+      },
     ),
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
   ));
 }
 
@@ -81,6 +88,26 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
+      ),
+      body: Column(
+        children: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                '/new',
+              );
+            },
+            child: Text(
+              'Add new bread crumb',
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              context.read<BreadCrumbProvider>().reset();
+            },
+            child: Text('Reset'),
+          ),
+        ],
       ),
     );
   }
