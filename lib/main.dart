@@ -2,25 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:hate/counter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Todo(),
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: TodoPage(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => Todo(),
+//       child: const MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         home: TodoPage(),
+//       ),
+//     );
+//   }
+// }
 
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'quiz.dart';
+
+// void main() => runApp(MyApp());
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (ctx) => Quiz(),
+//       child: MaterialApp(
+//         home: QuizPage(),
+//       ),
+//     );
+//   }
+// }
+
+// class QuizPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     var quiz = Provider.of<Quiz>(context);
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Quiz App')),
+//       body: quiz.isQuizFinished
+//           ? Center(
+//               child: Text('Your score: ${quiz.totalScore}'),
+//             )
+//           : Column(
+//               children: <Widget>[
+//                 Text(quiz.questions[quiz.questionIndex]['questionText']),
+//                 ...(quiz.questions[quiz.questionIndex]['answers']
+//                         as List<Map<String, dynamic>>)
+//                     .map((answer) => ElevatedButton(
+//                           onPressed: () => quiz.answerQuestion(answer['score']),
+//                           child: Text(answer['text']),
+//                         ))
+//                     .toList(),
+//               ],
+//             ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: quiz.resetQuiz,
+//         child: Icon(Icons.refresh),
+//       ),
+//     );
+//   }
+// }
 class TodoPage extends StatelessWidget {
   const TodoPage({super.key});
 
@@ -65,7 +112,7 @@ class TodoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Provider Todo App',
+          'T.E.C.H_uma\'s Todo App',
         ),
       ),
       body: Column(
@@ -85,21 +132,26 @@ class TodoPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: todo.todos.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    todo.todos[index],
-                  ),
-                  onTap: () => showEditDialog(index),
-                  trailing: IconButton(
-                    onPressed: () {
-                      todo.remove(
+                return Column(
+                  children: [
+                    // Checkbox(onChanged: ,value: ,);
+                    ListTile(
+                      title: Text(
                         todo.todos[index],
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.delete,
+                      ),
+                      onTap: () => showEditDialog(index),
+                      trailing: IconButton(
+                        onPressed: () {
+                          todo.remove(
+                            todo.todos[index],
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 );
               },
             ),

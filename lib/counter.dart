@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hate/counter.dart';
 
 class Todo extends ChangeNotifier {
-  List<String> _todos = [];
+  List<String> _todos = ['Wake up','Pray to God'];
 
   List<String> get todos => _todos;
 
